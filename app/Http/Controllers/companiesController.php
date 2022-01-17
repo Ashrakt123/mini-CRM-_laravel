@@ -98,10 +98,10 @@ class companiesController extends Controller
     {
         $request->validate([
 
-        'Name' => 'required',
-        'Email' => 'required',
+        'Name' => 'sometimes',
+        'Email' => 'sometimes',
         'logo' => 'sometimes|image|mimes:jpg,png,jpeg,gif,svg|dimensions:min_width=100,min_height=100',
-        'Website_URL'=>'required',
+        'Website_URL'=>'sometimes',
     ]); 
 
     $last_logo=$company->logo;

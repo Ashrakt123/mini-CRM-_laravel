@@ -45,11 +45,18 @@
           
             <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Company</strong>
-                <input type="tex"  class="form-control" value="{{ $contactperson->Email }}" name="Company" placeholder="Enter Email">
+                <strong>Company:</strong>
+                <select  name="Company" class="form-control">
+                    <option>Enter Name Of Your Company</option>
+                    @foreach ($companies as $company)
+                    <option value="{{$company->id}}" @if($company->id == $contactperson->Company )selected @endif>{{$company->Name}}</option>
+            @endforeach
+
+                </select>
             </div>
         </div>
-            
+
+
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Email:</strong>

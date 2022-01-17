@@ -5,6 +5,8 @@ use App\Models\contactperson;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\company;
+
 
 
 class contactPersonsController extends Controller
@@ -20,7 +22,7 @@ class contactPersonsController extends Controller
 
         $contactperson = contactperson::latest()->paginate(10);
     
-        return $companies . $contactperson ;
+        return  $contactperson;
     }
 
     /**
@@ -80,8 +82,8 @@ class contactPersonsController extends Controller
     public function edit($id)
     {
         $contactperson=contactperson::findOrFail($id);
-
-        return view('persons.edit', compact('contactperson'));
+         
+        return $contactperson;
 
     }
 
@@ -95,16 +97,16 @@ class contactPersonsController extends Controller
     public function update(Request $request, contactperson $contactperson)
     {
         $request->validate([
-            'FirstName' => 'required',
-            'LastName' => 'required',
-            'Company' => 'required',
-            'Email' => 'required',
-            'Phone'=>'required',
-            'LinkdinProfileURL'=>'required',
+            'FirstName' => 'sometimes',
+            'LastName' => 'sometimes',
+            'Company' => 'sometimes',
+            'Email' => 'sometimes',
+            'Phone'=>'sometimes',
+            'LinkdinProfileURL'=>'sometimes',
         ]);
-    
-        $contactperson ->update($request->all());
-    
+
+        $contactperson->update($request->all());
+        dd($contactperson);
         return  $contactperson ;
     }
 
@@ -122,6 +124,5 @@ class contactPersonsController extends Controller
 
     
         return  $contactperson ;
-    
     }
 }

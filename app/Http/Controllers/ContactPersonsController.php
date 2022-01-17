@@ -82,8 +82,8 @@ class ContactPersonsController extends Controller
     public function edit($id)
     {
         $contactperson=contactperson::findOrFail($id);
-
-        return view('persons.edit', compact('contactperson'));
+        $companies=company::all();
+        return view('persons.edit', compact('contactperson','companies'));
 
     }
 
@@ -94,18 +94,20 @@ class ContactPersonsController extends Controller
      * @param  \App\Models\contactperson  $contactperson
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, contactperson $contactperson)
+    public function update(Request $request, contactperson $person)
     {
+      
+
         $request->validate([
-            'FirstName' => 'required',
-            'LastName' => 'required',
-            'Company' => 'required',
-            'Email' => 'required',
-            'Phone'=>'required',
-            'LinkdinProfileURL'=>'required',
+            'FirstName' => 'sometimes',
+            'LastName' => 'sometimes',
+            'Company' => 'sometimes',
+            'Email' => 'sometimes',
+            'Phone'=>'sometimes',
+            'LinkdinProfileURL'=>'sometimes',
         ]);
-    
-        $contactperson->update($request->all());
+        
+        $person->update($request->all());
     
         return redirect()->route('persons.index')
                         ->with('success','company updated successfully');
